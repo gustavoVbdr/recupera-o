@@ -122,7 +122,7 @@
                             </label>
 
 
-                            <button onclick="cadastrar()">Cadastrar</button>
+                            <button>Cadastrar</button>
                         </form>
                     </div>
 
@@ -156,34 +156,45 @@
         if (compra >= 100 && (genero == 1 || genero ==2)){
             deveria = compra*(122.5/100);
             if (deveria > venda){
-                alert("O preço de venda deve ser 22,5% maior")
+                alert(`O preço de venda deve ser 22,5% maior, maior que ${deveria.toFixed(2)}`);
+            } else {
+                ativar()
             }
         } else if (compra <= 50 && (genero == 3 || genero == 1)){
             deveria = compra*1.25
 
             if(deveria > venda){
-                alert("O preço de venda deve ser 25% maior")
+                alert(`O preço de venda deve ser 25% maior,  maior que ${deveria.toFixed(2)}`);
+            } else{
+                ativar()
             }
 
         } else if (compra > 50 && compra < 100 && genero == 4){
             deveria = compra*(127.5/100);
-
             if (deveria > venda){
-
-                alert("O preço de venda deve ser 27,5% maior")
-
+                alert(`O preço de venda deve ser 27,5% maior,  maior que ${deveria,toFixed(2)}`);
+            } else{
+                ativar()
             }
 
 
         } else {
+            ativar()
+        }
 
+        return false;
+
+    }
+
+    function ativar(){
 
             var corpo = {
                 titulo: form_postagem.titulo.value,
                 fkGenero: form_postagem.fkGenero_lista.value,
                 fkAutor: form_postagem.fkAutor_lista.value,
                 precoCompra: form_postagem.precoCompra.value,
-                precoVenda: form_postagem.precoVenda.value
+                precoVenda: form_postagem.precoVenda.value,
+                estoqueQnt: form_postagem.estoqueQnt.value
             }
 
             fetch(`/livros/cadastrar`, {
@@ -210,16 +221,6 @@
                 console.log(`#ERRO: ${resposta}`);
 
             });
-
-
-        }
-        
-
-
-
-
-        return false;
-
     }
 
 
